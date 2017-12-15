@@ -1,0 +1,7 @@
+- use carp/croak
+- README
+- MANIFEST
+- Changes
+- DISCLAIMER
+- POD
+X cpanfile
