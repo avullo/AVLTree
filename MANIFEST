@@ -1,9 +1,27 @@
+avltree/avltree.c
+avltree/avltree.h
+avltree/Makefile.PL
+avltree/MYMETA.json
+avltree/MYMETA.yml
+AVLTree.xs
 Changes
+cpanfile
+ignore.txt
 lib/AVLTree.pm
 Makefile.PL
 MANIFEST			This list of files
+MANIFEST.SKIP
+MMETA.JSON
+MYMETA.yml
+ppport.h
 README
 t/00-load.t
+t/01-numbers.t
+t/02-custom.t
+t/03-leak.t
 t/manifest.t
 t/pod-coverage.t
 t/pod.t
+TODO
+typemap
+xt/boilerplate.t
