@@ -4,7 +4,7 @@ use strict;
 use warnings FATAL => 'all';
 
 use constant HAS_LEAKTRACE => eval{ require Test::LeakTrace };
-use Test::More HAS_LEAKTRACE ? (tests => 4) : (skip_all => 'require Test::LeakTrace');
+use Test::More HAS_LEAKTRACE ? (tests => 5) : (skip_all => 'require Test::LeakTrace');
 use Test::LeakTrace;
 
 BEGIN { use_ok('AVLTree'); }
@@ -30,6 +30,14 @@ no_leaks_ok {
 
   my $query = 30;
   my $result = $tree->find($query);
-} 'After querying';
+} 'After inserting&querying';
+
+no_leaks_ok {
+  my $tree = AVLTree->new(\&cmp_f);
+  map { $tree->insert($_) } qw/10 20 30 40 50 25/;
+
+  $tree->remove(1); # unsuccessful removal
+  $tree->remove(10); # successful removal
+} 'After inserting&removing';
 
 diag( "Testing memory leaking AVLTree $AVLTree::VERSION, Perl $], $^X" );

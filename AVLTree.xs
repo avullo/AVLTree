@@ -101,12 +101,20 @@ new( class, cmp_f )
 
 MODULE = AVLTree 	PACKAGE = AVLTreePtr
 
-int
-size(t)
+SV*
+find(t, ...)
   AVLTree* t
-  PROTOTYPE: $
+  INIT:
+    if(items < 2 || !SvOK(ST(1)) || SvTYPE(ST(1)) == SVt_NULL) {
+      XSRETURN_UNDEF;
+    }
   CODE:
-    RETVAL = avltree_size(t);
+    SV* result = avltree_find(t, ST(1));
+    if(SvOK(result) && SvTYPE(result) != SVt_NULL) {
+      /* WARN: if it's mortalised e.g. sv_2mortal(...)? returns "Attempt to free unreferenced scalar: SV" */
+      RETVAL = newSVsv(result);
+    } else
+      XSRETURN_UNDEF;
   OUTPUT:
     RETVAL
 
@@ -120,23 +128,25 @@ insert(t, item)
   OUTPUT:
     RETVAL
 
-SV*
-find(t, ...)
+int
+remove(t, item)
   AVLTree* t
-  INIT:
-    if(items < 2 || !SvOK(ST(1)) || SvTYPE(ST(1)) == SVt_NULL) {
-      XSRETURN_UNDEF;
-    }
+  SV* item
+  PROTOTYPE: $$
   CODE:
-    SV* result = avltree_find(t, ST(1));
-    if(SvOK(result) && SvTYPE(result) != SVt_NULL) {
-      /* WARN: shouldn't it be mortalised, e.g. sv_2mortal(...)? Returns "Attempt to free unreferenced scalar: SV" */
-      RETVAL = newSVsv(result);
-    } else
-      XSRETURN_UNDEF;
+    RETVAL = avltree_erase(t, item);
   OUTPUT:
     RETVAL
 
+int
+size(t)
+  AVLTree* t
+  PROTOTYPE: $
+  CODE:
+    RETVAL = avltree_size(t);
+  OUTPUT:
+    RETVAL
+    
 void DESTROY(t)
   AVLTree* t
   PROTOTYPE: $

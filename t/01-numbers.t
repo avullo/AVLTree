@@ -6,7 +6,7 @@ use Test::More;
 
 use Devel::Peek;
 
-plan tests => 13;
+plan tests => 18;
 
 use AVLTree;
 
@@ -33,5 +33,11 @@ my $result = $tree->find($query);
 ok($result, "Item found");
 
 ok(!$tree->find(18), "Item not found");
+
+ok(!$tree->remove(1), "Non existent item not removed");
+is($tree->size(), 6, "Tree size preserved after unsuccessful removal");
+ok($tree->remove(20), "Existing item removed");
+ok(!$tree->find(20), "Item removed not found");
+is($tree->size(), 5, "Tree size preserved after unsuccessful removal");
 
 diag( "Testing AVLTree $AVLTree::VERSION, Perl $], $^X" );
