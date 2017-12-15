@@ -176,11 +176,9 @@ SV *avltree_find ( avltree_t *tree, SV *data )
   while ( it != NULL ) {
     int cmp = tree->cmp ( it->data, data );
 
-    if ( cmp == 0 ) {
-      printf("Found\n");
+    if ( cmp == 0 )
       break;
-    }
-    printf("Going %s\n", cmp<0?"right":"left");
+
     it = it->link[cmp < 0];
   }
 

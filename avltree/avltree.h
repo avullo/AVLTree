@@ -1,4 +1,4 @@
-#ifndef JSW_AVLTREE_H
+#ifndef AVLTREE_H
 #define AVLTREE_H
 
 /*
@@ -60,4 +60,4 @@ void          *avltprev ( avltrav_t *trav );
 }
 #endif
 
-#endif
+#endif /* AVLTREE_H */
