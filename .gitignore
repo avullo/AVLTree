@@ -1,9 +1,12 @@
+*~
 /blib/
 blib/
+lib/*~
 cover_db/
 .last_cover_stats
 AVLTree.*
 avltree/*.o
+avltree/*~
 avltree/Makefile
 avltree/Makefile.old
 avltree/libavltree.a
