@@ -1,18 +1,26 @@
-AVLTree
+## AVLTree - Efficient AVL Balanced Binary Trees in Perl
 
-The README is used to introduce the module and provide instructions on
-how to install the module, any machine dependencies it may have (for
-example C compilers and installed libraries) and any other information
-that should be provided before the module is installed.
+Perl extension for creating and manipulating the AVL balanced tree data structure.
 
-A README file is required for CPAN modules since CPAN extracts the README
-file from a module distribution so that people browsing the archive
-can use it to get an idea of the module's uses. It is usually a good idea
-to provide version information here so that people can decide whether
-fixes for the module are worth downloading.
+AVLTree provides a simple and fast implementation of AVL balanced trees.
+This is accomplished by using the Perl XS extension mechanism by providing a 
+tiny wrapper around an efficient C library which does the core of the work. 
 
+The nodes of an AVL tree object can hold any kind of item, as long as each 
+one of these has an element which can be used to define a partial order on 
+the set of possible items. This is specified by providing, upon tree construction,
+a reference to a function for comparing any two of the possible items.
 
-INSTALLATION
+The underlying C library is a reinterpretation of the C library originally 
+developed by Julienne Walker. This library has been adapted for dealing 
+directly with Perl (SV) variables.
+
+The module at the moment is in beta stage. It provides methods for creating
+and querying an AVL tree, get its size and insert and remove elements from it.
+No methods exist to traverse the tree at this stage, but I promise this
+functionality is going to be implemented very soon.
+
+### INSTALLATION
 
 To install this module, run the following commands:
 
@@ -21,7 +29,7 @@ To install this module, run the following commands:
 	make test
 	make install
 
-SUPPORT AND DOCUMENTATION
+### SUPPORT AND DOCUMENTATION
 
 After installing, you can find documentation for this module with the
 perldoc command.
@@ -42,8 +50,17 @@ You can also look for information at:
     Search CPAN
         http://search.cpan.org/dist/AVLTree/
 
+### AUTHOR
 
-LICENSE AND COPYRIGHT
+Alessandro Vullo <avullo@cpan.org>
+
+### CONTRIBUTING
+
+You can obtain the most recent development version of this module via the GitHub
+repository at https://github.com/avullo/AVLTree. Please feel free to submit bug
+reports, patches etc.
+
+### LICENSE AND COPYRIGHT
 
 Copyright (C) 2017 Alessandro Vullo
 
@@ -52,4 +69,3 @@ under the terms of either: the GNU General Public License as published
 by the Free Software Foundation; or the Artistic License.
 
 See L<http://dev.perl.org/licenses/> for more information.
-
