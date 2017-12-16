@@ -49,12 +49,12 @@ int            avltree_erase ( avltree_t *tree, SV *data );
 size_t         avltree_size ( avltree_t *tree );
 
 /* Traversal functions */
-avltrav_t     *avltnew ( void );
-void           avltdelete ( avltrav_t *trav );
-void          *avltfirst ( avltrav_t *trav, avltree_t *tree );
-void          *avltlast ( avltrav_t *trav, avltree_t *tree );
-void          *avltnext ( avltrav_t *trav );
-void          *avltprev ( avltrav_t *trav );
+avltrav_t *avltnew ( void );
+void       avltdelete ( avltrav_t *trav );
+SV        *avltfirst ( avltrav_t *trav, avltree_t *tree );
+SV        *avltlast ( avltrav_t *trav, avltree_t *tree );
+SV        *avltnext ( avltrav_t *trav );
+SV        *avltprev ( avltrav_t *trav );
 
 #ifdef __cplusplus
 }
