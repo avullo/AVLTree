@@ -1,9 +1,7 @@
+AVLTree.xs
 avltree/avltree.c
 avltree/avltree.h
 avltree/Makefile.PL
-avltree/MYMETA.json
-avltree/MYMETA.yml
-AVLTree.xs
 Changes
 cpanfile
 ignore.txt
