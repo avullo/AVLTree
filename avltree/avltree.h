@@ -4,19 +4,18 @@
 /*
   AVL balanced tree library
 
-    > Created (Julienne Walker): June 17, 2003
-    > Modified (Julienne Walker): September 24, 2005
+  This is an adaptation of the AVL balanced tree C library
+  created by Julienne Walker which can be found here:
 
-  This code is in the public domain. Anyone may
-  use it or change it in any way that they see
-  fit. The author assumes no responsibility for 
-  damages incurred through use of the original
-  code or any variations thereof.
+  http://www.eternallyconfuzzled.com/Libraries.aspx
+  
+  This particular implementation makes it suitable for the
+  creation of a Perl tiny wrapper around this library using 
+  the Perl extension mechanism. 
 
-  It is requested, but not required, that due
-  credit is given to the original author and
-  anyone who has modified the code through
-  a header comment, such as this one.
+  The way this is accomplished is by using pointers to Perl 
+  variables as node items, instead of generic void pointers.
+
 */
 #ifdef __cplusplus
 #include <cstddef>

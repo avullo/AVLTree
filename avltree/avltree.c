@@ -1,8 +1,11 @@
 /*
   AVL balanced tree library
 
-    > Created (Julienne Walker): June 17, 2003
-    > Modified (Julienne Walker): September 24, 2005
+  This is an adaptation of the AVL balanced tree C library
+  created by Julienne Walker which can be found here:
+
+  http://www.eternallyconfuzzled.com/Libraries.aspx
+
 */
 #include "avltree.h"
 
