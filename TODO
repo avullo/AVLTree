@@ -1,7 +1,9 @@
-- use carp/croak
-- README
-- MANIFEST
-- Changes
-- DISCLAIMER
-- POD
-X cpanfile
+- Implement traversal methods
+
+- Provide common comparison functions for numbers, strings, hashes
+
+- Suitable exceptions
+
+- More comprehensive benchmarks
+
+- Continuous Integration, think TravisCI
