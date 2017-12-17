@@ -132,7 +132,8 @@ functionality is going to be implemented very soon.
   Returntype  : AVLTreePtr or undef if unable to instantiate
   Exceptions  : None
   Caller      : General
-  Status      : Interface might change to accomodate suitable defaults, e.g. numbers
+  Status      : Unstable, interface might change to accomodate suitable defaults, 
+                e.g. numbers
 
 =head2 find
 
@@ -151,7 +152,7 @@ functionality is going to be implemented very soon.
                 or it was undefined.
   Exceptions  : None
   Caller      : General
-  Status      : Stable
+  Status      : Unstable
 
 =head2 insert
 
@@ -166,7 +167,7 @@ functionality is going to be implemented very soon.
   Returntype  : Bool, true if the item was successfully installed, false otherwise 
   Exceptions  : None
   Caller      : General
-  Status      : Stable
+  Status      : Unstable
 
 =head2 remove
 
@@ -180,7 +181,7 @@ functionality is going to be implemented very soon.
   Returntype  : Bool, true if the item was successfully installed, false otherwise 
   Exceptions  : None
   Caller      : General
-  Status      : Stable
+  Status      : Unstable
 
 =head2 size
 
@@ -194,7 +195,7 @@ functionality is going to be implemented very soon.
  
   Exceptions  : None
   Caller      : General
-  Status      : Stable
+  Status      : Unstable
 
 =head1 DEPENDENCIES
 
