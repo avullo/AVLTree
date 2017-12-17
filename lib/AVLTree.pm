@@ -25,8 +25,8 @@ Version 0.01
 
 This module provides a simple and fast implementation of AVL balanced trees.
 It uses the Perl XS extension mechanism by providing a tiny wrapper around 
-an efficient C library which does the core of the work. Benchmarking shows 
-this module is at least 10X faster than a pure perl implementation.
+an efficient C library which does the core of the work. Preliminary benchmarking 
+shows this module one order of magnitude faster than a pure perl implementation.
 
 The nodes of an AVL tree object can hold any kind of item, as long as each 
 one of these has an element which can be used to define a partial order on 
