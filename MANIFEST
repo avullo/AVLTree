@@ -11,6 +11,8 @@ MANIFEST			This list of files
 MANIFEST.SKIP
 ppport.h
 README
+scripts/benchmarks.pl
+scripts/lib/Tree/AVL.pm
 t/00-load.t
 t/01-numbers.t
 t/02-custom.t
