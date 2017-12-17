@@ -5,7 +5,7 @@ use strict;
 use warnings;
 
 our $VERSION = '0.01';
-our $ENABLE_DEBUG = 1;
+our $ENABLE_DEBUG = 0;
 
 require XSLoader;
 XSLoader::load('AVLTree', $VERSION);
@@ -15,7 +15,7 @@ __END__
 
 =head1 NAME
 
-AVLTree - Perl extension for creating and manipulating the AVL balanced tree data structure.
+AVLTree - Perl extension for efficient creation and manipulation of AVL balanced binary trees.
 
 =head1 VERSION
 
@@ -24,8 +24,9 @@ Version 0.01
 =head1 DESCRIPTION
 
 This module provides a simple and fast implementation of AVL balanced trees.
-This is accomplished by using the Perl XS extension mechanism by providing a 
-tiny wrapper around an efficient C library which does the core of the work. 
+It uses the Perl XS extension mechanism by providing a tiny wrapper around 
+an efficient C library which does the core of the work. Benchmarking shows 
+this module is at least 10X faster than a pure perl implementation.
 
 The nodes of an AVL tree object can hold any kind of item, as long as each 
 one of these has an element which can be used to define a partial order on 
@@ -36,9 +37,9 @@ The underlying C library is a reinterpretation of the C library originally
 developed by Julienne Walker. This library has been adapted for dealing 
 directly with Perl (SV) variables.
 
-The module at the moment is in beta stage. It provides methods for creating
-and querying an AVL tree, get its size and insert and remove elements from it.
-No methods exist to traverse the tree at this stage, but I promise this
+The module at the moment is in beta stage but it is usable. It provides methods 
+for creating and querying an AVL tree, get its size and insert and remove elements 
+from it. No methods exist to traverse the tree at this stage, but I promise this
 functionality is going to be implemented very soon.
 
 =head1 SYNOPSIS
@@ -212,8 +213,16 @@ None
 
 There are of course other modules which provide this functionality, see e.g. Tree::AVL, Btrees.
 
+You can appreciate the power of this module by running some benchmarking against the above.
+If you've installed from source, go to the installation directory and:  
+
+  cd scripts
+  perl benchmarking.pl
+
+Preliminary experiments suggest speed gains of one order of magnitude.
+
 To the best of my knowledge, there are no modules using Perl XS attempting to implement AVL
-trees in the most efficient way possible. The closest thing is Tree::Fat, a Perl extension
+trees in the most efficient possible way. The closest thing is Tree::Fat, a Perl extension
 to implement Fat-Node trees.
 
 =head1 AUTHOR
@@ -262,10 +271,10 @@ L<http://search.cpan.org/dist/AVLTree/>
 
 =head1 ACKNOWLEDGEMENTS
 
-I am hugely in debt to Julienne Walker for generously providing the source 
+I am very grateful to Julienne Walker for generously providing the source 
 code of his production quality C library for handling AVL balanced trees.
 
-The original library can be found at:
+Julienne's library can be found at:
 
 http://www.eternallyconfuzzled.com/Libraries.aspx
 

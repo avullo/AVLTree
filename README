@@ -1,10 +1,11 @@
 ## AVLTree - Efficient AVL Balanced Binary Trees in Perl
 
-Perl extension for creating and manipulating the AVL balanced tree data structure.
+Perl extension for efficient creation and manipulation of AVL balanced binary trees.
 
 AVLTree provides a simple and fast implementation of AVL balanced trees.
-This is accomplished by using the Perl XS extension mechanism by providing a 
-tiny wrapper around an efficient C library which does the core of the work. 
+It uses the Perl XS extension mechanism by providing a tiny wrapper around
+an efficient C library which does the core of the work. Benchmarking shows 
+this module is at least 10X faster than a pure perl implementation.
 
 The nodes of an AVL tree object can hold any kind of item, as long as each 
 one of these has an element which can be used to define a partial order on 
@@ -15,9 +16,9 @@ The underlying C library is a reinterpretation of the C library originally
 developed by Julienne Walker. This library has been adapted for dealing 
 directly with Perl (SV) variables.
 
-The module at the moment is in beta stage. It provides methods for creating
-and querying an AVL tree, get its size and insert and remove elements from it.
-No methods exist to traverse the tree at this stage, but I promise this
+The module at the moment is in beta stage but it is usable. It provides methods
+for creating and querying an AVL tree, get its size and insert and remove elements
+from it. No methods exist to traverse the tree at this stage, but I promise this
 functionality is going to be implemented very soon.
 
 ### INSTALLATION
