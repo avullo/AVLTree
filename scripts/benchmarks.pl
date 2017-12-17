@@ -12,7 +12,6 @@ use lib "$Bin/../lib", "$Bin/../blib/lib", "$Bin/../blib/arch";
 use AVLTree;
 use Tree::AVL;
 
-use Data::Dumper;
 use Benchmark;
 
 $| = 1;

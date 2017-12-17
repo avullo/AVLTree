@@ -199,6 +199,8 @@ functionality is going to be implemented very soon.
 =head1 DEPENDENCIES
 
 AVLTree requires Carp and Test::More and Test::LeakTrace to run the tests during installation.
+If you want to run the benchmarks in the scripts directory, you need to install the Benchmark 
+and List::Util modules.
 
 =head1 CHANGES
 
