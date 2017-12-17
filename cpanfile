@@ -1,5 +1,9 @@
 requires 'Carp';
 
+# for running benchmarks
+recommends 'Benchmark';
+recommends 'List::Util';
+
 # test_requires 'Test::Warnings';
 # test_requires 'Test::Differences';
 # test_requires 'Test::Exception';
