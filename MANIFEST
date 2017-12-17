@@ -2,7 +2,9 @@ AVLTree.xs
 avltree/avltree.c
 avltree/avltree.h
 avltree/Makefile.PL
+CONTRIBUTING
 Changes
+LICENSE
 cpanfile
 ignore.txt
 lib/AVLTree.pm
