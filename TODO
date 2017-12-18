@@ -1,3 +1,5 @@
+- Switch to semantic versioning
+
 - Implement traversal methods
 
 - Provide common comparison functions for numbers, strings, hashes
