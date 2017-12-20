@@ -4,7 +4,7 @@ use 5.008;
 use strict;
 use warnings;
 
-our $VERSION = '0.01';
+our $VERSION = '0.0.2';
 our $ENABLE_DEBUG = 0;
 
 require XSLoader;
@@ -19,7 +19,7 @@ AVLTree - Perl extension for efficient creation and manipulation of AVL balanced
 
 =head1 VERSION
 
-Version 0.01
+Version 0.0.2
 
 =head1 DESCRIPTION
 
