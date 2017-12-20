@@ -4,8 +4,6 @@ use strict;
 use warnings;
 use Test::More;
 
-use Devel::Peek;
-
 plan tests => 18;
 
 use AVLTree;
