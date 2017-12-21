@@ -4,7 +4,7 @@ use 5.008;
 use strict;
 use warnings;
 
-our $VERSION = '0.0.2';
+our $VERSION = '0.0.3';
 our $ENABLE_DEBUG = 0;
 
 require XSLoader;
@@ -19,7 +19,7 @@ AVLTree - Perl extension for efficient creation and manipulation of AVL balanced
 
 =head1 VERSION
 
-Version 0.0.2
+Version 0.0.3
 
 =head1 DESCRIPTION
 
@@ -205,7 +205,11 @@ and List::Util modules.
 
 =head1 CHANGES
 
-0.01 2017-12-18
+0.0.3 Thu 21 Dec 2017
+   * Additional dependency necessary for CPAN testers
+   * Removed AVL::Tree import for benchmarking
+
+0.01  Mon 18 Dec 2017
    * First release to CPAN, partial port of jsw_avltree AVL tree C library, traversal methods not implemented.
 
 =head1 EXPORT
