@@ -1,4 +1,14 @@
 Revision history for Perl module AVLTree
 
-0.01 2017-12-18
+0.0.5 Sat 30 Dec 2017
+   * Attempt to circumnvent compilation problems with threaded versions
+
+0.0,4 Sun 24 Dec 2017
+   * Minor improvements in the documentation
+
+0.0.3 Thu 21 Dec 2017
+   * Additional dependency necessary for CPAN testers
+   * Removed AVL::Tree import for benchmarking
+
+0.01 Mon 18 Dec 2017
    * First release to CPAN, partial port of jsw_avltree AVL tree C library, traversal methods not implemented.
