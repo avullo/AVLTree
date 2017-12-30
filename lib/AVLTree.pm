@@ -4,7 +4,7 @@ use 5.008;
 use strict;
 use warnings;
 
-our $VERSION = '0.0.3';
+our $VERSION = '0.0.4';
 our $ENABLE_DEBUG = 0;
 
 require XSLoader;
@@ -19,23 +19,23 @@ AVLTree - Perl extension for efficient creation and manipulation of AVL balanced
 
 =head1 VERSION
 
-Version 0.0.3
+Version 0.0.4
 
 =head1 DESCRIPTION
 
-This module provides a simple and fast implementation of AVL balanced trees.
+This module provides a simple and fast implementation of B<AVL balanced binary trees>.
 It uses the Perl XS extension mechanism by providing a tiny wrapper around 
 an efficient C library which does the core of the work. Preliminary benchmarking 
 shows this module one order of magnitude faster than a pure perl implementation.
 
 The nodes of an AVL tree object can hold any kind of item, as long as each 
-one of these has an element which can be used to define a partial order on 
-the set of possible items. This is specified by providing, upon tree construction,
+one of these can be used or has an element that can be use to define a partial order 
+on the set of possible items. This is specified by providing, upon tree construction,
 a reference to a function for comparing any two of the possible items.
 
 The underlying C library is a reinterpretation of the C library originally 
-developed by Julienne Walker. This library has been adapted for dealing 
-directly with Perl (SV) variables.
+developed by Julienne Walker L<http://www.eternallyconfuzzled.com/jsw_home.aspx>. 
+This library has been adapted for dealing directly with Perl (SV) variables.
 
 The module at the moment is in beta stage but it is usable. It provides methods 
 for creating and querying an AVL tree, get its size and insert and remove elements 
@@ -118,7 +118,7 @@ functionality is going to be implemented very soon.
 
 =head1 METHODS
 
-=head2 new
+=head2 C<new>
 
   Arg [1]     : (required) A reference to a subroutine
   
@@ -135,7 +135,7 @@ functionality is going to be implemented very soon.
   Status      : Unstable, interface might change to accomodate suitable defaults, 
                 e.g. numbers
 
-=head2 find
+=head2 C<find>
 
   Arg [1]     : Item to search, can be defined just in terms of the attribute
                 with which the items in the tree are compared. 
@@ -154,7 +154,7 @@ functionality is going to be implemented very soon.
   Caller      : General
   Status      : Unstable
 
-=head2 insert
+=head2 C<insert>
 
   Arg [1]     : An item to insert in the tree.
   
@@ -169,7 +169,7 @@ functionality is going to be implemented very soon.
   Caller      : General
   Status      : Unstable
 
-=head2 remove
+=head2 C<remove>
 
   Arg[1]      : An item to remove from the tree
   
@@ -183,7 +183,7 @@ functionality is going to be implemented very soon.
   Caller      : General
   Status      : Unstable
 
-=head2 size
+=head2 C<size>
 
   Arg[...]    : None
   
@@ -199,11 +199,14 @@ functionality is going to be implemented very soon.
 
 =head1 DEPENDENCIES
 
-AVLTree requires Carp and Test::More and Test::LeakTrace to run the tests during installation.
+AVLTree requires Carp and Test::More, Test::Deep and Test::LeakTrace to run the tests during installation.
 If you want to run the benchmarks in the scripts directory, you need to install the Benchmark 
 and List::Util modules.
 
 =head1 CHANGES
+
+0.0,4 Sun 24 Dec 2017
+   * Minor improvements in the documentation
 
 0.0.3 Thu 21 Dec 2017
    * Additional dependency necessary for CPAN testers
@@ -218,8 +221,10 @@ None
 
 =head1 SEE ALSO
 
-There are of course other modules which provide this functionality, see e.g. Tree::AVL, Btrees.
+If you want to get a deeper insight into the module, you should of course take a look at the excellent AVL 
+tree library developed by Julienne Walker L<http://www.eternallyconfuzzled.com/jsw_home.aspx>. 
 
+There are of course other modules which provide this functionality, see e.g. Tree::AVL, Btrees.
 You can appreciate the power of this module by running some benchmarking against the above.
 If you've installed from source, go to the installation directory and:  
 
