@@ -409,22 +409,22 @@ static SV *move (pTHX_ avltrav_t *trav, int dir )
   return trav->it == NULL ? &PL_sv_undef : trav->it->data;
 }
 
-SV *avltfirst ( avltrav_t *trav, avltree_t *tree )
+SV *avltfirst (pTHX_ avltrav_t *trav, avltree_t *tree )
 {
   return start (aTHX_ trav, tree, 0 ); /* Min value */
 }
 
-SV *avltlast ( avltrav_t *trav, avltree_t *tree )
+SV *avltlast (pTHX_ avltrav_t *trav, avltree_t *tree )
 {
   return start (aTHX_ trav, tree, 1 ); /* Max value */
 }
 
-SV *avltnext ( avltrav_t *trav )
+SV *avltnext (pTHX_ avltrav_t *trav )
 {
   return move (aTHX_ trav, 1 ); /* Toward larger items */
 }
 
-SV *avltprev ( avltrav_t *trav )
+SV *avltprev (pTHX_ avltrav_t *trav )
 {
   return move (aTHX_ trav, 0 ); /* Toward smaller items */
 }
