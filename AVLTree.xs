@@ -55,7 +55,7 @@ typedef avltree_t AVLTree;
 
 static SV* callback = (SV*)NULL;
 
-static int compare(SV *p1, SV *p2) {
+static int svcompare(SV *p1, SV *p2) {
   /*
     This is one way to avoid the above mentioned error when 
     declaring the PERL_NO_GET_CONTEXT macro
@@ -92,13 +92,13 @@ static int compare(SV *p1, SV *p2) {
   return cmp;
 }
 
-static SV* clone(SV* p) {
+static SV* svclone(SV* p) {
   dTHX;       /* fetch context */
   
   return newSVsv(p);
 }
 
-void destroy(SV* p) {
+void svdestroy(SV* p) {
   dTHX;       /* fetch context */
   
   SvREFCNT_dec(p);
@@ -123,7 +123,7 @@ new( class, cmp_f )
       SvSetSV(callback, cmp_f);
     
     TRACEME("Allocating AVL tree");
-    RETVAL = avltree_new(compare, clone, destroy);
+    RETVAL = avltree_new(svcompare, svclone, svdestroy);
 
     if(RETVAL == NULL) {
       warn("Unable to allocate AVL tree");
@@ -143,7 +143,7 @@ find(t, ...)
       XSRETURN_UNDEF;
     }
   CODE:
-    SV* result = avltree_find(t, ST(1));
+    SV* result = avltree_find(aTHX_ t, ST(1));
     if(SvOK(result) && SvTYPE(result) != SVt_NULL) {
       /* WARN: if it's mortalised e.g. sv_2mortal(...)? returns "Attempt to free unreferenced scalar: SV" */
       RETVAL = newSVsv(result);
