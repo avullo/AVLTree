@@ -8,7 +8,7 @@ use Test::More;
 use Test::Deep;
 use Carp;
 
-plan tests => 24;
+plan tests => 29;
 
 use AVLTree;
 
@@ -63,6 +63,13 @@ ok($item->{id} == 10, 'First item');
 my @ids = qw/25 30 40 50/;
 while ($item = $tree->nxt()) {
   ok($item->{id} == shift @ids, 'Next item');
+}
+
+$item = $tree->last;
+ok($item->{id} == 50, 'Last item');
+@ids = qw/40 30 25 10/;
+while ($item = $tree->prev) {
+  ok($item->{id} == shift @ids, 'Prev item');
 }
 
 diag( "Testing AVLTree $AVLTree::VERSION, Perl $], $^X" );

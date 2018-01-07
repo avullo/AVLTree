@@ -250,6 +250,28 @@ first(self)
     RETVAL
 
 SV*
+last(self)
+  SV* self
+  PROTOTYPE: $
+  PREINIT:
+    AVLTree* tree;
+    AVLTrav* trav;
+  CODE:
+    SV** svp = hv_fetch((HV*)SvRV(self), "tree", 4, 0);
+    if(svp == NULL)
+      croak("Unable to access tree\n");
+    tree = INT2PTR(AVLTree*, SvIV(*svp));
+    svp = hv_fetch((HV*)SvRV(self), "trav", 4, 0);
+    if(svp == NULL)
+      croak("Unable to access tree traversal\n");
+    trav = INT2PTR(AVLTrav*, SvIV(*svp));
+
+    RETVAL = newSVsv(avltlast(trav, tree));
+
+  OUTPUT:
+    RETVAL
+
+SV*
 nxt(self)
   SV* self
   PROTOTYPE: $
@@ -266,7 +288,25 @@ nxt(self)
 
   OUTPUT:
     RETVAL
-      
+
+SV*
+prev(self)
+  SV* self
+  PROTOTYPE: $
+  PREINIT:
+    AVLTree* tree;
+    AVLTrav* trav;
+  CODE:
+    SV** svp = hv_fetch((HV*)SvRV(self), "trav", 4, 0);
+    if(svp == NULL)
+      croak("Unable to access tree traversal\n");
+    trav = INT2PTR(AVLTrav*, SvIV(*svp));
+
+    RETVAL = newSVsv(avltprev(trav));
+
+  OUTPUT:
+    RETVAL
+
 void DESTROY(self)
   SV* self
   PROTOTYPE: $
