@@ -50,6 +50,7 @@ extern "C" {
 #endif
 
 typedef avltree_t AVLTree;
+typedef avltrav_t AVLTrav;
 
 /* C-level callbacks required by the AVL tree library */
 
@@ -109,41 +110,63 @@ void svdestroy(SV* p) {
  *====================================================================*/
 
 MODULE = AVLTree 	PACKAGE = AVLTree
-  
-AVLTree*
-new( class, cmp_f )
-  char* class
-  SV*   cmp_f
-  PROTOTYPE: $$
-  CODE:
-    TRACEME("Registering callback for comparison");
-    if(callback == (SV*)NULL)
-      callback = newSVsv(cmp_f);
-    else
-      SvSetSV(callback, cmp_f);
-    
-    TRACEME("Allocating AVL tree");
-    RETVAL = avltree_new(svcompare, svclone, svdestroy);
 
-    if(RETVAL == NULL) {
-      warn("Unable to allocate AVL tree");
-      XSRETURN_UNDEF;
+void
+new ( class, cmp_fn )
+    char* class
+    SV*   cmp_fn
+    PROTOTYPE: $$
+    PREINIT:
+        AVLTree* tree;
+        AVLTrav* trav;
+    PPCODE:
+    {
+      SV* self;
+      HV* hash = newHV();
+
+      TRACEME("Registering callback for comparison");
+      if(callback == (SV*)NULL)
+        callback = newSVsv(cmp_fn);
+      else
+        SvSetSV(callback, cmp_fn);
+    
+      TRACEME("Allocating AVL tree");      
+      tree = avltree_new(svcompare, svclone, svdestroy);
+      if(tree == NULL)
+	croak("Unable to allocate AVL tree");	
+      hv_store(hash, "tree", 4, newSViv(PTR2IV(tree)), 0);
+
+      TRACEME("Allocating AVL tree traversal");
+      trav = avltnew();
+      if(trav == NULL)
+	croak("Unable to allocate AVL tree traversal");
+      hv_store(hash, "trav", 4, newSViv(PTR2IV(trav)), 0);
+      
+      self = newRV_noinc((SV*)hash);;
+      sv_2mortal(self);
+      sv_bless(self, gv_stashpv(class, FALSE));
+     
+      PUSHs(self);
+      XSRETURN(1);
     }
 
-  OUTPUT:
-    RETVAL
-
-MODULE = AVLTree 	PACKAGE = AVLTreePtr
-
 SV*
-find(t, ...)
-  AVLTree* t
+find(self, ...)
+  SV* self
+  PREINIT:
+    AVLTree* tree;
   INIT:
     if(items < 2 || !SvOK(ST(1)) || SvTYPE(ST(1)) == SVt_NULL) {
       XSRETURN_UNDEF;
     }
   CODE:
-    SV* result = avltree_find(aTHX_ t, ST(1));
+    // get tree pointer
+    SV** svp = hv_fetch((HV*)SvRV(self), "tree", 4, 0);
+    if(svp == NULL)
+      croak("Unable to access tree\n");
+    tree = INT2PTR(AVLTree*, SvIV(*svp));
+
+    SV* result = avltree_find(aTHX_ tree, ST(1));
     if(SvOK(result) && SvTYPE(result) != SVt_NULL) {
       /* WARN: if it's mortalised e.g. sv_2mortal(...)? returns "Attempt to free unreferenced scalar: SV" */
       RETVAL = newSVsv(result);
@@ -153,39 +176,78 @@ find(t, ...)
     RETVAL
 
 int
-insert(t, item)
-  AVLTree* t
+insert(self, item)
+  SV* self
   SV* item
   PROTOTYPE: $$
+  PREINIT:
+    AVLTree* tree;
   CODE:
-    RETVAL = avltree_insert(t, item);
+    SV** svp = hv_fetch((HV*)SvRV(self), "tree", 4, 0);
+    if(svp == NULL)
+      croak("Unable to access tree\n");
+    tree = INT2PTR(AVLTree*, SvIV(*svp));
+    
+    RETVAL = avltree_insert(tree, item);
+
   OUTPUT:
     RETVAL
 
 int
-remove(t, item)
-  AVLTree* t
+remove(self, item)
+  SV* self
   SV* item
   PROTOTYPE: $$
+  PREINIT:
+    AVLTree* tree;
   CODE:
-    RETVAL = avltree_erase(t, item);
+    SV** svp = hv_fetch((HV*)SvRV(self), "tree", 4, 0);
+    if(svp == NULL)
+      croak("Unable to access tree\n");
+    tree = INT2PTR(AVLTree*, SvIV(*svp));
+
+    RETVAL = avltree_erase(tree, item);
+
   OUTPUT:
     RETVAL
 
 int
-size(t)
-  AVLTree* t
+size(self)
+  SV* self
   PROTOTYPE: $
+  PREINIT:
+    AVLTree* tree;
   CODE:
-    RETVAL = avltree_size(t);
+    SV** svp = hv_fetch((HV*)SvRV(self), "tree", 4, 0);
+    if(svp == NULL)
+      croak("Unable to access tree\n");
+    tree = INT2PTR(AVLTree*, SvIV(*svp));
+  
+    RETVAL = avltree_size(tree);
   OUTPUT:
     RETVAL
     
-void DESTROY(t)
-  AVLTree* t
+void DESTROY(self)
+  SV* self
   PROTOTYPE: $
+  PREINIT:
+    AVLTree* tree;
+    AVLTrav* trav;
   CODE:
-      TRACEME("Deleting AVL tree");
-      avltree_delete(t);
+    TRACEME("Deleting AVL tree");
+    SV** svp = hv_fetch((HV*)SvRV(self), "tree", 4, 0);
+    if(svp == NULL)
+      croak("Unable to access tree\n");
+    tree = INT2PTR(AVLTree*, SvIV(*svp));
+    avltree_delete(tree);
+
+    TRACEME("Deleting AVL tree traversal");
+    svp = hv_fetch((HV*)SvRV(self), "trav", 4, 0);
+    if(svp == NULL)
+      croak("Unable to access tree traversal\n");
+    trav = INT2PTR(AVLTrav*, SvIV(*svp));
+    avltdelete(trav);
+
+
 
   
