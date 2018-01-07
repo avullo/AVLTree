@@ -26,7 +26,7 @@ sub cmp_f {
 }
 
 my $tree = AVLTree->new(\&cmp_f);
-isa_ok($tree, "AVLTreePtr");
+isa_ok($tree, "AVLTree");
 is($tree->size(), 0, "Empty tree upon construction");
 
 my $items =

@@ -17,7 +17,7 @@ sub cmp_f {
 }
 
 my $tree = AVLTree->new(\&cmp_f);
-isa_ok($tree, "AVLTreePtr");
+isa_ok($tree, "AVLTree");
 is($tree->size(), 0, "Empty tree upon construction");
 
 map { ok($tree->insert($_), "Insert item") } qw/10 20 30 40 50 25/;
