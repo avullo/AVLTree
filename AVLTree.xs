@@ -226,7 +226,47 @@ size(self)
     RETVAL = avltree_size(tree);
   OUTPUT:
     RETVAL
-    
+
+SV*
+first(self)
+  SV* self
+  PROTOTYPE: $
+  PREINIT:
+    AVLTree* tree;
+    AVLTrav* trav;
+  CODE:
+    SV** svp = hv_fetch((HV*)SvRV(self), "tree", 4, 0);
+    if(svp == NULL)
+      croak("Unable to access tree\n");
+    tree = INT2PTR(AVLTree*, SvIV(*svp));
+    svp = hv_fetch((HV*)SvRV(self), "trav", 4, 0);
+    if(svp == NULL)
+      croak("Unable to access tree traversal\n");
+    trav = INT2PTR(AVLTrav*, SvIV(*svp));
+
+    RETVAL = newSVsv(avltfirst(trav, tree));
+
+  OUTPUT:
+    RETVAL
+
+SV*
+nxt(self)
+  SV* self
+  PROTOTYPE: $
+  PREINIT:
+    AVLTree* tree;
+    AVLTrav* trav;
+  CODE:
+    SV** svp = hv_fetch((HV*)SvRV(self), "trav", 4, 0);
+    if(svp == NULL)
+      croak("Unable to access tree traversal\n");
+    trav = INT2PTR(AVLTrav*, SvIV(*svp));
+
+    RETVAL = newSVsv(avltnext(trav));
+
+  OUTPUT:
+    RETVAL
+      
 void DESTROY(self)
   SV* self
   PROTOTYPE: $

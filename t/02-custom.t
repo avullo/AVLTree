@@ -8,7 +8,7 @@ use Test::More;
 use Test::Deep;
 use Carp;
 
-plan tests => 19;
+plan tests => 24;
 
 use AVLTree;
 
@@ -56,5 +56,13 @@ is($tree->size(), 6, "Tree size preserved after unsuccessful removal");
 ok($tree->remove({ id => 20 }), "Existing item removed");
 ok(!$tree->find({ id => 20 }), "Item removed not found");
 is($tree->size(), 5, "Tree size preserved after unsuccessful removal");
+
+# test traversal
+my $item = $tree->first;
+ok($item->{id} == 10, 'First item');
+my @ids = qw/25 30 40 50/;
+while ($item = $tree->nxt()) {
+  ok($item->{id} == shift @ids, 'Next item');
+}
 
 diag( "Testing AVLTree $AVLTree::VERSION, Perl $], $^X" );
