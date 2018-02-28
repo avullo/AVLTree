@@ -197,6 +197,24 @@ functionality is going to be implemented very soon.
   Caller      : General
   Status      : Unstable
 
+=head1 TREE TRAVERSAL METHODS
+
+=head2 C<first>
+
+  Arg [...]   : None
+  
+  Example     : my $item = $tree->first;
+                print $item, "\n";
+                while($item = $tree->nxt) { print $item, "\n"; }
+
+  Description : Returns the first element as specified by the order defined by  the tree. 
+
+  Returntype  : The item, if found, as stored in the tree or undef
+                if the tree is empty.
+  Exceptions  : None
+  Caller      : General
+  Status      : Unstable
+
 =head1 DEPENDENCIES
 
 AVLTree requires Carp and Test::More, Test::Deep and Test::LeakTrace to run the tests during installation.
