@@ -8,7 +8,7 @@ use Test::More;
 use Test::Deep;
 use Carp;
 
-plan tests => 29;
+plan tests => 31;
 
 use AVLTree;
 
@@ -28,6 +28,8 @@ sub cmp_f {
 my $tree = AVLTree->new(\&cmp_f);
 isa_ok($tree, "AVLTree");
 is($tree->size(), 0, "Empty tree upon construction");
+ok(!$tree->first, 'First element does not exist');
+ok(!$tree->last, 'Last element does not exist');
 
 my $items =
   [
