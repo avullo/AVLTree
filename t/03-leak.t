@@ -107,7 +107,7 @@ no_leaks_ok {
      { id => 25, data => 'twneryfive' });  
 
   my $item = $tree->first;
-  while ($item = $tree->nxt) {}
+  while ($item = $tree->next) {}
 } 'Tree traversal';
 
 
