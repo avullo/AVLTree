@@ -272,7 +272,7 @@ last(self)
     RETVAL
 
 SV*
-nxt(self)
+next(self)
   SV* self
   PROTOTYPE: $
   PREINIT:

@@ -63,7 +63,7 @@ is($tree->size(), 5, "Tree size preserved after unsuccessful removal");
 my $item = $tree->first;
 ok($item->{id} == 10, 'First item');
 my @ids = qw/25 30 40 50/;
-while ($item = $tree->nxt()) {
+while ($item = $tree->next()) {
   ok($item->{id} == shift @ids, 'Next item');
 }
 
