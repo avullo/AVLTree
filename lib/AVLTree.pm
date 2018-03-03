@@ -4,7 +4,7 @@ use 5.008;
 use strict;
 use warnings;
 
-our $VERSION = '0.0.6';
+our $VERSION = '0.1.6';
 our $ENABLE_DEBUG = 0;
 
 require XSLoader;
@@ -19,7 +19,7 @@ AVLTree - Perl extension for efficient creation and manipulation of AVL balanced
 
 =head1 VERSION
 
-Version 0.0.6
+Version 0.1.6
 
 =head1 DESCRIPTION
 
@@ -39,8 +39,7 @@ This library has been adapted for dealing directly with Perl (SV) variables.
 
 The module at the moment is in beta stage but it is usable. It provides methods 
 for creating and querying an AVL tree, get its size and insert and remove elements 
-from it. No methods exist to traverse the tree at this stage, but I promise this
-functionality is going to be implemented very soon.
+from it. Additionaly, it is possible to traverse the tree in forward/reverse order.
 
 =head1 SYNOPSIS
 
@@ -113,6 +112,16 @@ functionality is going to be implemented very soon.
   } else {
     print "Item with id $id not found\n";
   }
+
+  # forward tree traversal
+  my $item = $tree->first();
+  print "First item: ", $item, "\n";
+
+  while($item = $tree->next()) {
+    print $item, "\n";
+  }
+
+  # and similarly for reverse iteratio, using last/prev methods
 
   ...
 
@@ -204,10 +213,54 @@ functionality is going to be implemented very soon.
   Arg [...]   : None
   
   Example     : my $item = $tree->first;
-                print $item, "\n";
-                while($item = $tree->nxt) { print $item, "\n"; }
 
-  Description : Returns the first element as specified by the order defined by  the tree. 
+  Description : Returns the first element as specified by the order defined by the tree.
+
+  Returntype  : The item, if found, as stored in the tree or undef
+                if the tree is empty.
+  Exceptions  : None
+  Caller      : General
+  Status      : Unstable
+
+=head2 C<last>
+
+  Arg [...]   : None
+
+  Example     : my $item = $tree->last;
+
+  Description : Returns the last element as specified by the order defined by the tree.
+
+  Returntype  : The item, if found, as stored in the tree or undef
+                if the tree is empty.
+  Exceptions  : None
+  Caller      : General
+  Status      : Unstable
+
+=head2 C<next>
+
+  Arg [...]   : None
+
+  Example     : my $item = $tree->first;
+                print $item, "\n";
+                while($item = $tree->next) { print $item, "\n"; }
+
+  Description : Returns the next element as specified by the order defined by the tree.
+
+  Returntype  : The item, if found, as stored in the tree or undef
+                if the tree is empty.
+  Exceptions  : None
+  Caller      : General
+  Status      : Unstable
+
+=head2 C<prev>
+
+  Arg [...]   : None
+
+  Example     : my $item = $tree->last;
+                print $item, "\n";
+                while($item = $tree->prev) { print $item, "\n"; }
+
+  Description : Returns the previous element as specified by the order defined by the tree.
 
   Returntype  : The item, if found, as stored in the tree or undef
                 if the tree is empty.
@@ -298,13 +351,12 @@ http://www.eternallyconfuzzled.com/Libraries.aspx
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2017 Alessandro Vullo.
+Copyright [2017-2018] Alessandro Vullo.
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published
 by the Free Software Foundation; or the Artistic License.
 
 See L<http://dev.perl.org/licenses/> for more information.
-
 
 =cut
