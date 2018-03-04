@@ -244,7 +244,7 @@ first(self)
       croak("Unable to access tree traversal\n");
     trav = INT2PTR(AVLTrav*, SvIV(*svp));
 
-    RETVAL = newSVsv(avltfirst(trav, tree));
+    RETVAL = newSVsv(avltfirst(aTHX_ trav, tree));
 
   OUTPUT:
     RETVAL
@@ -266,7 +266,7 @@ last(self)
       croak("Unable to access tree traversal\n");
     trav = INT2PTR(AVLTrav*, SvIV(*svp));
 
-    RETVAL = newSVsv(avltlast(trav, tree));
+    RETVAL = newSVsv(avltlast(aTHX_ trav, tree));
 
   OUTPUT:
     RETVAL
@@ -284,7 +284,7 @@ next(self)
       croak("Unable to access tree traversal\n");
     trav = INT2PTR(AVLTrav*, SvIV(*svp));
 
-    RETVAL = newSVsv(avltnext(trav));
+    RETVAL = newSVsv(avltnext(aTHX_ trav));
 
   OUTPUT:
     RETVAL
@@ -302,7 +302,7 @@ prev(self)
       croak("Unable to access tree traversal\n");
     trav = INT2PTR(AVLTrav*, SvIV(*svp));
 
-    RETVAL = newSVsv(avltprev(trav));
+    RETVAL = newSVsv(avltprev(aTHX_ trav));
 
   OUTPUT:
     RETVAL
