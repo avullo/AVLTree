@@ -1,5 +1,8 @@
 Revision history for Perl module AVLTree
 
+0.1.7 Sun 04 Mar 2018
+   * Bug fix: tree traversal methods support with multi-threaded perls
+   
 0.1.6 Sat 03 Mar 2018
    * Support for tree traversal methods
 
